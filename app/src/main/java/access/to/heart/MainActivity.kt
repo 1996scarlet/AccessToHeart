@@ -2,7 +2,7 @@ package access.to.heart
 
 import access.to.heart.fragment.HistoryFragment
 import access.to.heart.fragment.MeasureFragment
-import access.to.heart.fragment.UserFragment
+import access.to.heart.fragment.ProfileFragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -24,12 +24,15 @@ class MainActivity : AppCompatActivity() {
                 override fun getCount(): Int = 3
 
                 override fun getItem(position: Int): Fragment {
+                    val fragment: Fragment
                     when (position) {
-                        0 -> return MeasureFragment()
-                        1 -> return HistoryFragment()
-                        2 -> return Fragment()
+                        0 -> fragment = MeasureFragment()
+                        1 -> fragment = HistoryFragment()
+                        2 -> fragment = ProfileFragment()
                         else -> return Fragment()
                     }
+                    fragment.arguments = intent.extras
+                    return fragment
                 }
             }
 

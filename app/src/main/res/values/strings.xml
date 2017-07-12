@@ -8,4 +8,6 @@
     <string name="login_edit_password">密码</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="add_profile">添加档案</string>
+    <string name="log_off">注销登陆</string>
 </resources>

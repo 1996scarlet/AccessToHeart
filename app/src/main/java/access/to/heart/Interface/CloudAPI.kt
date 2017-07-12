@@ -1,6 +1,7 @@
 package access.to.heart.Interface
 
 import access.to.heart.Bean.Heart
+import access.to.heart.Bean.ProfileUser
 import access.to.heart.Bean.User
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -35,4 +36,15 @@ interface CloudAPI {
 
     @POST("heart")
     fun postHeart(@Body heart: Heart): Observable<String>
+
+    //-----------------------------------------------------------------------------//
+
+    @GET("profile_user")
+    fun getProfile(@Query("offset") offset: Int = 0,
+                   @Query("query") query: String? = null,
+                   @Query("sortby") sortby: String? = null,
+                   @Query("order") order: String? = null): Observable<List<ProfileUser>>
+
+    @POST("profile_user")
+    fun postProfile(@Body profileUser: ProfileUser): Observable<String>
 }

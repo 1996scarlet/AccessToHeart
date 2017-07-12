@@ -39,7 +39,8 @@ class SplashActivity : AppCompatActivity() {
                     }
 
                     override fun onNext(t: List<User>) {
-                        startActivity(Intent(baseContext, MainActivity::class.java))
+                        startActivity(Intent(baseContext, MainActivity::class.java)
+                                .putExtra("id", id))
                         finish()
                     }
                 })
