@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AccessToHeart</string>
+    <string name="start_measure">开始测量</string>
+    <string name="start_your_show">开始你的测量</string>
+    <string name="drop_and_reclip">放弃并重新测量</string>
+    <string name="save_this_item">保存这条记录</string>
+    <string name="login_edit_username">用户名</string>
+    <string name="login_edit_password">密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+</resources>
