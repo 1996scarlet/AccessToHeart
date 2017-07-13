@@ -1,6 +1,7 @@
 # AccessToHeart
 使用摄像头测量心率的玄学APP
-## API后台项目地址 <a href="https://github.com/1996scarlet/Go-AccessToHeart/">Go-AccessToHeart</a>
+### API后台项目地址 <a href="https://github.com/1996scarlet/Go-AccessToHeart/">Go-AccessToHeart</a>
+## 前往酷市场下载 <a href="http://www.coolapk.com/apk/access.to.heart">酷市场-AccessToHeart</a>
 ------------------
 > 注册账号：请使用数字账号注册 例如窝工的学号   
 > 使用注意：温度对测量结果影响很大 请在适宜的温度下进行测量   
