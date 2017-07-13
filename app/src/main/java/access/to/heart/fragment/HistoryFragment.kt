@@ -8,7 +8,6 @@ import access.to.heart.StatisticsActivity
 import access.to.heart.utils.GlobalOptions
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.widget.TextView
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,6 +39,8 @@ class HistoryFragment : BaseFragment() {
             }
         }
 
+        initData()
+
         recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = historyAdapter
@@ -56,7 +57,6 @@ class HistoryFragment : BaseFragment() {
             })
         }
 
-        initData()
     }
 
     private fun updateData() {
@@ -76,8 +76,11 @@ class HistoryFragment : BaseFragment() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : MyTemplateObserver<List<Heart>>() {
+                    override fun onError(e: Throwable) {
+                        historyAdapter.resetItems(mutableListOf())
+                    }
+
                     override fun onNext(t: List<Heart>) {
-                        Log.i("TAG", t[0].HeartBeat.toString())
                         historyAdapter.resetItems(t as MutableList<Heart>)
                     }
                 })

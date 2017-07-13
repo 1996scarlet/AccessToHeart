@@ -50,4 +50,7 @@ interface CloudAPI {
 
     @POST("profile_user")
     fun postProfile(@Body profileUser: ProfileUser): Observable<String>
+
+    @DELETE("profile_user/{id}")
+    fun deleteProfileById(@Path("id") profileId: Int): Observable<String>
 }

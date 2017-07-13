@@ -15,6 +15,10 @@ class LoginActivity(override val layoutId: Int = R.layout.fragment_user) : BaseA
             }
         }
 
+        off_line_button.setOnClickListener {
+            startActivity(Intent(this, OffActivity::class.java))
+        }
+
         register_button.apply {
             setOnClickListener {
                 if (et_userId.text.isNullOrEmpty() || et_password.text.isNullOrEmpty()) {

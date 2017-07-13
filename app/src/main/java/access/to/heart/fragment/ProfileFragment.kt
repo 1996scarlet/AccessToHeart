@@ -10,9 +10,11 @@ import access.to.heart.R
 import access.to.heart.utils.GlobalOptions
 import android.content.Intent
 import android.preference.PreferenceManager
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -26,27 +28,17 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : BaseFragment() {
 
     private var userId: Int = 0
-//    private lateinit var mAdapter: ArrayAdapter<String>
 
     override fun init() {
 
         userId = arguments["id"] as Int
 
         add.setOnClickListener {
-            cloudAPI.postProfile(ProfileUser(ProfileName = "user$userId",
-                    User = User(Id = userId)))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : MyStringObserver() {
-                        override fun onNext(t: String) {
-                            super.onNext(t)
-                        }
-
-                        override fun onError(e: Throwable) {
-                            Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show()
-                            getProfileFromApi()
-                        }
-                    })
+            val et: EditText = EditText(activity)
+            AlertDialog.Builder(activity).setTitle("输入档案名称")
+                    .setView(et)
+                    .setPositiveButton("添加", { _, _ -> addProfileToApi(et.text.toString()) })
+                    .show()
         }
 
         logoff.setOnClickListener {
@@ -59,7 +51,36 @@ class ProfileFragment : BaseFragment() {
             startActivity(Intent(activity, PersonActivity::class.java))
         }
 
+        delete.setOnClickListener {
+            cloudAPI.deleteProfileById(GlobalOptions.nowProfileId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : MyTemplateObserver<String>() {
+                        override fun onNext(t: String) {
+                            Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show()
+                            getProfileFromApi()
+                        }
+                    })
+        }
+
         getProfileFromApi()
+    }
+
+    private fun addProfileToApi(profileName: String) {
+        cloudAPI.postProfile(ProfileUser(ProfileName = profileName,
+                User = User(Id = userId)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : MyStringObserver() {
+                    override fun onNext(t: String) {
+                        super.onNext(t)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show()
+                        getProfileFromApi()
+                    }
+                })
     }
 
     private fun clearSharedPreferences() =
@@ -91,9 +112,10 @@ class ProfileFragment : BaseFragment() {
                                 override fun onNothingSelected(p0: AdapterView<*>?) {
                                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                                 }
-
                             }
                         }
+
+                        mAdapter.notifyDataSetChanged()
                     }
                 })
     }

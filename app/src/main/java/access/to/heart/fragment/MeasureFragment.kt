@@ -35,7 +35,10 @@ class MeasureFragment : BaseFragment() {
             rxPermissions
                     .request(Manifest.permission.CAMERA)
                     .subscribe {
-                        if (it) startActivityForResult(Intent(context, HeartRateMonitor::class.java), 10086)
+                        if (it){
+                            Toast.makeText(context, "请把手指指尖放在摄像头上", Toast.LENGTH_SHORT).show()
+                            startActivityForResult(Intent(context, HeartRateMonitor::class.java), 10086)
+                        }
                         else Toast.makeText(context, "没有获得权限", Toast.LENGTH_SHORT).show()
                     }
         }

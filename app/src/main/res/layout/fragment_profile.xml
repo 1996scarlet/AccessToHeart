@@ -20,6 +20,15 @@
         android:textColor="@android:color/white" />
 
     <Button
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/delete_profile"
+        android:textColor="@android:color/white" />
+
+    <Button
         android:id="@+id/pie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

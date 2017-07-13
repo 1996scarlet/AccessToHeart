@@ -19,4 +19,6 @@
     <string name="about">尽管这款应用测量足够准确，但是并不代表可以将它作为专业医疗设备和合格医疗护理的替代，
     若对您的健康状况有任何担忧，请咨询您的私人医生或前往医院</string>
     <string name="self">个人统计</string>
+    <string name="off_line_mode">离线模式</string>
+    <string name="delete_profile">删除档案</string>
 </resources>
