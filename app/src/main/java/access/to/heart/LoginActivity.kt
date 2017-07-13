@@ -17,19 +17,24 @@ class LoginActivity(override val layoutId: Int = R.layout.fragment_user) : BaseA
 
         register_button.apply {
             setOnClickListener {
-                cloudAPI.postUser(User(Id = et_userId.text.toString().toInt()
-                        , Password = et_password.text.toString()))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(object : MyTemplateObserver<String>() {
-                            override fun onError(e: Throwable) {
-                                loginMethod()
-                            }
+                if (et_userId.text.isNullOrEmpty() || et_password.text.isNullOrEmpty()) {
+                    et_userId.error = "用户名或密码不能为空"
+                } else {
+                    cloudAPI.postUser(User(Id = et_userId.text.toString().toInt()
+                            , Password = et_password.text.toString()))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(object : MyTemplateObserver<String>() {
+                                override fun onError(e: Throwable) {
+                                    loginMethod()
+                                }
 
-                            override fun onNext(t: String) {
-                                et_userId.error = "该ID已经被注册"
-                            }
-                        })
+                                override fun onNext(t: String) {
+                                    et_userId.error = "该ID已经被注册"
+                                }
+                            })
+                }
+
             }
         }
     }

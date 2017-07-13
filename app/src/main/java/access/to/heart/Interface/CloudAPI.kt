@@ -37,6 +37,9 @@ interface CloudAPI {
     @POST("heart")
     fun postHeart(@Body heart: Heart): Observable<String>
 
+    @DELETE("heart/{id}")
+    fun deleteHeartById(@Path("id") heartId: Int): Observable<String>
+
     //-----------------------------------------------------------------------------//
 
     @GET("profile_user")

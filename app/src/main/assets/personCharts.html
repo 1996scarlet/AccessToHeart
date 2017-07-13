@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <script type="text/javascript" src="js/highcharts-more.js"></script>
+
+    <script type="text/javascript">
+        function initChart(str) {
+            $.getJSON(str, function (data) {
+                var myState = new Array(0,0,0,0);
+                for(var i=0; i<data.length; i++){
+                    myState[parseInt(data[i].HeartState)]++
+                }
+                Highcharts.chart('container', {
+                     title: {
+                        text: 'Heart State'
+                     },
+                     credits: {
+                        enabled: false
+                     },
+                     tooltip: {
+                            headerFormat: '{series.name}<br>',
+                            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                     plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: '测量状态分布情况',
+                        data: [
+                            ['休息',   myState[0]],
+                            ['热身',       myState[1]],
+                            ['有氧',    myState[2]],
+                            ['极限',     myState[3]]
+                        ]
+                    }]
+                });
+                 Highcharts.chart('container2', {
+                      title: null,
+                     credits: {
+                        enabled: false
+                     },
+                     xAxis: {
+                         categories: ['休息','热身','有氧','极限']
+                     },
+                    yAxis: {
+                        title: null
+                    },
+                     series: [{
+                        type: 'column',
+                        colorByPoint: true,
+                        data: myState,
+                        showInLegend: false
+                    }]
+                });
+            });
+        }
+
+    </script>
+</head>
+<body>
+<div id="container"></div>
+<div id="container2"></div>
+</body>
+</html>

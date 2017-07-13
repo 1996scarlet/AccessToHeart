@@ -3,6 +3,7 @@ package access.to.heart.fragment
 import access.to.heart.Bean.User
 import access.to.heart.HTTPAround.MyTemplateObserver
 import access.to.heart.R
+import access.to.heart.utils.GlobalOptions
 import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,7 +28,7 @@ class UserFragment : BaseFragment() {
 
                             override fun onNext(t: List<User>) {
                                 if (t.isNotEmpty()) {
-                                    nowUser = t[0]
+                                    GlobalOptions.nowUser = t[0]
                                 }
                             }
                         })

@@ -10,4 +10,13 @@
     <string name="register">注册</string>
     <string name="add_profile">添加档案</string>
     <string name="log_off">注销登陆</string>
+    <string name="bmp">bmp</string>
+    <string name="rest">休息</string>
+    <string name="hot">热身</string>
+    <string name="ox">有氧</string>
+    <string name="limit">极限</string>
+    <string name="delete">删除这条记录</string>
+    <string name="about">尽管这款应用测量足够准确，但是并不代表可以将它作为专业医疗设备和合格医疗护理的替代，
+    若对您的健康状况有任何担忧，请咨询您的私人医生或前往医院</string>
+    <string name="self">个人统计</string>
 </resources>

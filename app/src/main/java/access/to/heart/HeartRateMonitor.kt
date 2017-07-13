@@ -181,6 +181,8 @@ class HeartRateMonitor : Activity() {
             startTime = System.currentTimeMillis()
             heartLine = StringBuilder()
             beats = 0.0
+
+            finish()
         }
         processing.set(false)
     }

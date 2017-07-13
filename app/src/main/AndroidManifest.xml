@@ -3,7 +3,6 @@
     package="access.to.heart">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -30,6 +29,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
+        <activity android:name=".StatisticsActivity" />
+        <activity android:name=".PersonActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package access.to.heart.fragment
 
-import access.to.heart.Bean.User
 import access.to.heart.Interface.CloudAPI
 import android.app.Activity
 import android.content.Context
@@ -32,7 +31,6 @@ abstract class BaseFragment : Fragment() {
     protected lateinit var mActivity: Activity
 
     protected lateinit var rxPermissions: RxPermissions
-    protected var nowUser: User = User()
 
     protected var cloudAPI: CloudAPI = Retrofit.Builder()
             .baseUrl(CLOUD_BASE_URL)
