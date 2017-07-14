@@ -23,6 +23,8 @@ class LoginActivity(override val layoutId: Int = R.layout.fragment_user) : BaseA
             setOnClickListener {
                 if (et_userId.text.isNullOrEmpty() || et_password.text.isNullOrEmpty()) {
                     et_userId.error = "用户名或密码不能为空"
+                } else if (et_userId.text.toString().toIntOrNull() == null) {
+                    et_userId.error = "用户Id不能大于2^32"
                 } else {
                     cloudAPI.postUser(User(Id = et_userId.text.toString().toInt()
                             , Password = et_password.text.toString()))
