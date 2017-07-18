@@ -31,7 +31,9 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".PersonActivity" />
-        <activity android:name=".OffActivity"></activity>
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name=".OffActivity" />
     </application>
 
 </manifest>

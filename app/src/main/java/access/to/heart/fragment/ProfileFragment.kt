@@ -43,6 +43,7 @@ class ProfileFragment : BaseFragment() {
 
         logoff.setOnClickListener {
             clearSharedPreferences()
+            GlobalOptions.nowProfileId = 0
             startActivity(Intent(activity, LoginActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
         }
@@ -77,7 +78,7 @@ class ProfileFragment : BaseFragment() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "添加档案成功", Toast.LENGTH_SHORT).show()
                         getProfileFromApi()
                     }
                 })
@@ -91,9 +92,16 @@ class ProfileFragment : BaseFragment() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : MyTemplateObserver<List<ProfileUser>>() {
-                    override fun onNext(t: List<ProfileUser>) {
+                    override fun onError(e: Throwable) {
+                        addProfileToApi("default")
+                    }
 
-                        if (t.isEmpty()) return
+                    override fun onNext(t: List<ProfileUser>) {
+//
+//                        if (t.isEmpty()) {
+//
+//                            return
+//                        }
 
                         GlobalOptions.nowProfileId = t[0].Id
 

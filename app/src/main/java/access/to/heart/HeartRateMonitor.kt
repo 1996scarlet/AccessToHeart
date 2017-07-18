@@ -12,6 +12,7 @@ import android.os.PowerManager
 import android.os.PowerManager.WakeLock
 import android.util.Log
 import android.view.SurfaceHolder
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_measure.*
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -27,6 +28,7 @@ class HeartRateMonitor : Activity() {
 
     private val TAG = "HeartRateMonitor"
     private val processing = AtomicBoolean(false)
+    private var mToast: Toast? = null
 
     private var previewHolder: SurfaceHolder? = null
     private var camera: Camera? = null
@@ -96,6 +98,13 @@ class HeartRateMonitor : Activity() {
         camera = null
     }
 
+    private fun showTextToast(msg: String) {
+        if (mToast == null) {
+            mToast = Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT)
+        }
+        mToast!!.show()
+    }
+
     private val previewCallback = PreviewCallback { data, cam ->
         /**
          * {@inheritDoc}
@@ -109,11 +118,14 @@ class HeartRateMonitor : Activity() {
         val height = size.height
 
         val imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(), height, width)
-//        Log.i(TAG, "imgAvg="+imgAvg);
-        if (imgAvg == 0 || imgAvg == 255) {
+//        Log.i(TAG, "imgAvg=" + imgAvg);
+        if (imgAvg == 255 || imgAvg < 150) {
+            showTextToast("请把手指指尖放在摄像头上")
             processing.set(false)
             return@PreviewCallback
         }
+
+//        if (imgAvg < 150) return@PreviewCallback
 
         var averageArrayAvg = 0
         var averageArrayCnt = 0
